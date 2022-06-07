@@ -7,10 +7,14 @@ export default function Homepage(props) {
   const navigate = useNavigate();
     
   return (
-    <div className="homepage">
+    <div className='horizontal'>
+      <div className='vertical'>
+        <div className='title'>BlueBook</div>
+        <br/>
         <button onClick={()=>navigate("/login")}>Log In</button>
         <br/>
         <button onClick={()=>navigate("/signup")}>Sign Up</button>
+      </div>
     </div>
   )
 };

@@ -7,9 +7,9 @@ export default function Homepage(props) {
   const navigate = useNavigate();
     
   return (
-    <div className='horizontal'>
-      <div className='vertical'>
-        <div className='title'>BlueBook</div>
+    <div className="home-horizontal">
+      <div className="home-vertical">
+        <div className="home-title">BlueBook</div>
         <br/>
         <button onClick={()=>navigate("/login")}>Log In</button>
         <br/>

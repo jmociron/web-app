@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
+import "./Login.css";
 
 export default class Login extends Component {
   
@@ -51,15 +52,17 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Log In</h2>
-        <form>
-          E-mail: <input type="text" id="l-email" placeholder="Email" />
-          <br/>
-          Password: <input type="password" id="l-password" placeholder="Password" />
-          <br/>
-          <button id="login" onClick={this.login}>Log In</button>
-        </form>
+      <div className="login-horizontal">
+        <div className="login-vertical">
+        <div className="login-title">Log In</div>
+          <form className="login-form">
+            <input type="text" id="l-email" placeholder="Email" className="login-input"/>
+            <br/>
+            <input type="password" id="l-password" placeholder="Password" className="login-input"/>
+            <br/>
+            <button id="login" onClick={this.login}>Log In</button>
+          </form>
+        </div>
       </div>
     )
   }

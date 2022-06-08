@@ -54,7 +54,7 @@ export default class Login extends Component {
     return (
       <div className="login-horizontal">
         <div className="login-vertical">
-        <div className="login-title">Log In</div>
+          <div className="login-title">Log In</div>
           <form className="login-form">
             <input type="text" id="l-email" placeholder="Email" className="login-input"/>
             <br/>
@@ -62,7 +62,8 @@ export default class Login extends Component {
             <br/>
             <button id="login" onClick={this.login}>Log In</button>
           </form>
-        </div>
+          <a href="/signup">Sign up for BlueBook</a>
+          </div>
       </div>
     )
   }

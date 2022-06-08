@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Signup.css";
 
 export default class Signup extends Component {
   
@@ -39,19 +40,22 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Sign Up</h2>
-        <form>
-          First name: <input type="text" id="s-fname" placeholder="First name" />
-          <br/>
-          Last name: <input type="text" id="s-lname" placeholder="Last name" />
-          <br/>
-          E-mail: <input type="text" id="s-email" placeholder="Email" />
-          <br/>
-          Password: <input type="password" id="s-password" placeholder="Password" />
-          <br/>
-          <button id="signup" onClick={this.signup}>Sign Up</button>
-        </form>
+      <div className="signup-horizontal">
+        <div className="signup-vertical">
+          <div className="signup-title">Sign Up</div>
+          <form className="signup-form">
+            <input type="text" id="s-fname" placeholder="First name" className="signup-input"/>
+            <br/>
+            <input type="text" id="s-lname" placeholder="Last name" className="signup-input"/>
+            <br/>
+            <input type="text" id="s-email" placeholder="Email" className="signup-input"/>
+            <br/>
+            <input type="password" id="s-password" placeholder="Password" className="signup-input"/>
+            <br/>
+            <button id="signup" onClick={this.signup}>Sign Up</button>
+          </form>
+          <a href="/login">Already have an account?</a>
+        </div>
       </div>
     )
   }

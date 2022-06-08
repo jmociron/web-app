@@ -18,8 +18,8 @@
     align-items: center;
 }
 
-/* styling for buttons */
-.signup-vertical button{
+/* styling for enabled button */
+.signup-form button{
     width: 100%;
     border: none;
     border-radius: 50px;

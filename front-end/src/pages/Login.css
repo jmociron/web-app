@@ -18,8 +18,8 @@
     align-items: center;
 }
 
-/* styling for buttons */
-.login-vertical button{
+/* styling for enabled button */
+.login-form button{
     width: 100%;
     border: none;
     border-radius: 50px;
@@ -60,4 +60,9 @@
     font-size: 13px;
     text-decoration: none;
     color: #00A1EE;
+}
+
+.email-prompt{
+    margin-top: 5px;
+    font-size: 10px;
 }

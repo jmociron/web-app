@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import isValidEmail from 'pragmatic-email-regex';
 import "./Signup.css";
 
 export default class Signup extends Component {
@@ -15,10 +16,22 @@ export default class Signup extends Component {
 
     // retrieves input and saves to user object
     const user = {
-      fname: document.getElementById("s-fname").value,
-      lname: document.getElementById("s-lname").value,
-      email: document.getElementById("s-email").value,
-      password: document.getElementById("s-password").value
+      fname: document.getElementById("signup-fname").value,
+      lname: document.getElementById("signup-lname").value,
+      email: document.getElementById("signup-email").value,
+      password: document.getElementById("signup-password").value
+    }
+
+    // checks if any field is empty
+    if(Object.values(user).indexOf("") > -1){
+      alert("Please fill out all fields before signing up.")
+      return
+    }
+
+    // checks if email is valid
+    if(!isValidEmail(user.email)){
+      alert("Please enter a valid email.")
+      return
     }
 
     // POST request to the server
@@ -33,8 +46,8 @@ export default class Signup extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        if (body.success) { alert("Successfully saved user"); }
-        else { alert("Failed to save user"); }
+        if (body.success) { alert("Successfully saved user!"); }
+        else { alert("Failed to save user."); }
       });
   }
 
@@ -44,15 +57,35 @@ export default class Signup extends Component {
         <div className="signup-vertical">
           <div className="signup-title">Sign Up</div>
           <form className="signup-form">
-            <input type="text" id="s-fname" placeholder="First name" className="signup-input"/>
+            <input
+              type="text"
+              id="signup-fname"
+              placeholder="First name"
+              className="signup-input"
+            />
             <br/>
-            <input type="text" id="s-lname" placeholder="Last name" className="signup-input"/>
+            <input
+              type="text"
+              id="signup-lname"
+              placeholder="Last name"
+              className="signup-input"
+            />
             <br/>
-            <input type="text" id="s-email" placeholder="Email" className="signup-input"/>
+            <input
+              type="email"
+              id="signup-email"
+              placeholder="Email"
+              className="signup-input"
+            />
             <br/>
-            <input type="password" id="s-password" placeholder="Password" className="signup-input"/>
+            <input
+              type="password"
+              id="signup-password"
+              placeholder="Password"
+              className="signup-input"
+            />
             <br/>
-            <button id="signup" onClick={this.signup}>Sign Up</button>
+            <button id="signup-button" onClick={this.signup}> Sign Up </button>
           </form>
           <a href="/login">Already have an account?</a>
         </div>

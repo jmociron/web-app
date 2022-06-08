@@ -55,7 +55,7 @@ const login = (req, res) => {
       // initializes a token containing id as payload, and a signature
       const token = jwt.sign(payload, "THIS_IS_A_SECRET_STRING");
 
-      return res.send({ success: true, token, username: user.name });
+      return res.send({ success: true, token, username: user.fname });
 
     })
   })

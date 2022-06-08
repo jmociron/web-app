@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import "./Feed.css";
 
-export default class Dashboard extends Component {
+export default class Feed extends Component {
 
   constructor(props) {
     super(props);
@@ -12,7 +13,6 @@ export default class Dashboard extends Component {
       isLoggedIn: null,
       username: localStorage.getItem("username")
     }
-
     this.logout = this.logout.bind(this);
   }
 
@@ -57,9 +57,11 @@ export default class Dashboard extends Component {
       if (this.state.isLoggedIn) {
         return (
           <div>
-            Welcome to the Dashboard, { this.state.username }
+            <header>
+              Welcome to BlueBook, { this.state.username }
+              <button id="logout" onClick={this.logout}>Log Out</button>
+            </header>
             <br/>
-            <button id="logout" onClick={this.logout}>Log Out</button>
           </div> 
         )
       }

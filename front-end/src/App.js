@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
+import Feed from "./pages/Feed";
 
 function App() {
   return (
@@ -27,8 +27,8 @@ function App() {
           />
           <Route
             exact={true}
-            path="/dashboard"
-            element={<Dashboard/>}
+            path="/feed"
+            element={<Feed/>}
           />
         </Routes>
       </BrowserRouter>

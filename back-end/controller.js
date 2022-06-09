@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const User = mongoose.model("User");
 const Friend = mongoose.model("Friend");
+const Post = mongoose.model("Post");
 
 const signup = (req, res) => {
 
@@ -110,4 +111,14 @@ const getFriends = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getFriends }
+const getPosts = (req, res) => {
+  Post.find({}).sort({timestamp: -1}).exec(
+    (err, posts) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(posts);
+      }
+  });
+}
+
+export { signup, login, checkIfLoggedIn, getFriends, getPosts }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Friends from './Friends';
+import Posts from './Posts';
 import "./Feed.css";
 
 export default class Feed extends Component {
@@ -73,11 +74,14 @@ export default class Feed extends Component {
                 <Friends/>
               </aside>
               <main className="middle">
-                Middle
+                <form className="form">
+                      <input type="text"/>
+                  <div className='form-buttons'>
+                      <button type="submit">Post Now</button>
+                  </div>
+                  </form>
+                <Posts/>
               </main>
-              <aside className="right">
-                Right
-              </aside>
             </div>
           </div>
         )

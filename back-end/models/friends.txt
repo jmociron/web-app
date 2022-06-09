@@ -1,3 +1,0 @@
-db.friends.insertOne({name: "Alan Turing", email: "turing@gmail.com", isFriend: false, isAdded: true})
-db.friends.insertOne({name: "Tim Berners-Lee", email: "timbernerslee@w3c.com", isFriend: true, isAdded: true})
-db.friends.insertOne({name: "Sheila Greibach", email: "sgreibach@yahoo.com", isFriend: false, isAdded: false})

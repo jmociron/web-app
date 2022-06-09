@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 const FriendSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
-  isAccepted: { type: Boolean, required: true }
+  isFriend: { type: Boolean, required: true },
+  isAdded: { type: Boolean, required: true }
 });
 
 // compiles the Friend model

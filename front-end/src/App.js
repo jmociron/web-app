@@ -4,6 +4,7 @@ import Homepage from "./pages/Homepage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Feed from "./pages/Feed";
+import Friends from "./pages/Friends";
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
             exact={true}
             path="/feed"
             element={<Feed/>}
+          />
+          <Route
+            exact={true}
+            path="/getfriends"
+            element={<Friends/>}
           />
         </Routes>
       </BrowserRouter>

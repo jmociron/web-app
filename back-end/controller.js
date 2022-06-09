@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 
-// creates a User using the UserSchema
 const User = mongoose.model("User");
+const Friend = mongoose.model("Friend");
 
 const signup = (req, res) => {
 
@@ -98,4 +98,16 @@ const checkIfLoggedIn = (req, res) => {
     });
 }
 
-export { signup, login, checkIfLoggedIn }
+const getFriends = (req, res) => {
+  // retrieves all friends
+  Friend.find(
+    (err, friends) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(friends);
+      }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getFriends }

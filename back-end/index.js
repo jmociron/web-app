@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import "./models/user.js";
+import "./models/friend.js";
 import router from "./router.js";
 
 // connects to the EXER10 databse on default port 27017

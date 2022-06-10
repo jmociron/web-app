@@ -8,18 +8,10 @@ export default class Friends extends React.Component {
         this.state = {
           friends: []
         }
-        this.get = this.get.bind(this);
     }
 
     componentDidMount() {
-        this.get();
-    }
-
-    componentDidUpdate(){
-        this.get();
-    }
-
-    get(){
+        
         // retrieves friends from the friends collection
         fetch('http://localhost:3001/getfriends')
         .then(function(response) {
@@ -28,18 +20,7 @@ export default class Friends extends React.Component {
         .then(body =>{
             this.setState({ friends: body })
         })
-    }
-    
-    delete(friend){
-        fetch(
-            "http://localhost:3001/deleterequest",
-            {
-                method: "POST",
-                headers: {
-                "Content-Type": "application/json"
-                },
-                body: JSON.stringify(friend)
-            })
+
     }
       
     render(){
@@ -65,7 +46,7 @@ export default class Friends extends React.Component {
                             return <div className="other-user" key={friend._id}> 
                             <div className="user-name">{friend.fname} <br/> {friend.lname}</div>
                             <button className="user-button">Confirm</button>
-                            <button className="user-button" onClick={()=> this.delete(friend)}>Delete</button>
+                            <button className="user-button">Delete</button>
                             </div>
 
                         } else { 

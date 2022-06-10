@@ -8,11 +8,21 @@ export default class Posts extends React.Component {
         this.state = {
           posts: []
         }
+        this.get = this.get.bind(this);
         this.delete = this.delete.bind(this);
     }
 
-    componentDidMount() {
-        
+    // sends a GET request when component is mounted
+    componentDidMount(){
+        this.get();
+    }
+
+    // sends a GET request again when a post is modified
+    componentDidUpdate(){
+        this.get();
+    }
+
+    get(){
         fetch('http://localhost:3001/getposts')
         .then(function(response) {
         return response.json();
@@ -20,7 +30,6 @@ export default class Posts extends React.Component {
         .then(body =>{
             this.setState({ posts: body })
         })
-
     }
 
     delete(post){
@@ -33,12 +42,7 @@ export default class Posts extends React.Component {
                 },
                 body: JSON.stringify(post)
             })
-            .then(response => response.json())
-            .then(body => {    
-                if (!body.success){ console.log("Failed to delete post.") }
-                else { console.log("Post deleted!") }
-            })
-        
+        this.render()
     }
       
     render(){

@@ -124,11 +124,10 @@ const getPosts = (req, res) => {
 const deletePost = (req, res) => {
   Post.findOneAndRemove(
     { _id : req.body._id },
-    (err, post) => { 
+    (err) => { 
       if(err){ console.log(err) }
-      else { res.send.post }
     }
-    )
+  )
 }
 
 export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost }

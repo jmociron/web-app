@@ -9,3 +9,14 @@
     background-color:#00A1EE;
     color: #FFFFFF;
 }
+
+.post-button{
+    width: 75px;
+    margin-top: 10px;
+    margin-right: 10px;
+    color: #00A1EE;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 50px;
+}

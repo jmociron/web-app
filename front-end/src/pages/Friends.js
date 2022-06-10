@@ -18,7 +18,6 @@ export default class Friends extends React.Component {
         return response.json();
         })
         .then(body =>{
-            console.log(body)
             this.setState({ friends: body })
         })
 

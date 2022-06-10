@@ -5,3 +5,4 @@ db.friends.insertOne({fname: "Sheila", lname: "Greibach", email: "sgreibach@yaho
 db.posts.insertOne({ timestamp: new Date(), author: "Sheila Greibach", content: "Hello world!"})
 db.posts.insertOne({ timestamp: new Date(), author: "Alan Turing", content: "Hello world!"})
 db.posts.insertOne({ timestamp: new Date(), author: "Tim Berners-Lee", content: "Hello world!"})
+db.posts.insertOne({ timestamp: new Date(), author: "Jamie Ciron", content: "Hello world!"})

@@ -121,4 +121,14 @@ const getPosts = (req, res) => {
   });
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts }
+const deletePost = (req, res) => {
+  Post.findOneAndRemove(
+    { _id : req.body._id },
+    (err, post) => { 
+      if(err){ console.log(err) }
+      else { res.send.post }
+    }
+    )
+}
+
+export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost }

@@ -45,6 +45,26 @@ export default class Friends extends React.Component {
         });
     }
 
+    delete(friend){
+        fetch(
+            "http://localhost:3001/deleterequest",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(friend)
+            })
+        .then(response => response.json())
+        .then(body => {
+            if (body.success) {
+                alert("Successfully deleted friend request!");
+                window.location.reload();
+            }
+            else { alert("Failed to delete friend request."); }
+        });
+    }
+
     add(friend){
         fetch(
             "http://localhost:3001/addfriend",
@@ -93,7 +113,7 @@ export default class Friends extends React.Component {
                             return <div className="other-user" key={friend._id}> 
                             <div className="user-name">{fullName}</div>
                             <button className="user-button" onClick={()=> this.accept(friend)}>Accept</button>
-                            <button className="user-button">Delete</button>
+                            <button className="user-button" onClick={()=> this.delete(friend)}>Delete</button>
                             </div>
                         } else { 
                             return <div key={friend._id}></div>

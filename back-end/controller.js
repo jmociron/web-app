@@ -176,6 +176,17 @@ const acceptRequest = (req, res) => {
   )
 }
 
+const deleteRequest = (req, res) => {
+  Friend.findOneAndUpdate(
+    { _id : req.body._id },
+    { $set: { isFriendRequest: false }},
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
+    }
+  )
+}
+
 const addFriend = (req, res) => {
   Friend.findOneAndUpdate(
     { _id : req.body._id },
@@ -187,4 +198,4 @@ const addFriend = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost, acceptRequest, addFriend }
+export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost, acceptRequest, addFriend, deleteRequest }

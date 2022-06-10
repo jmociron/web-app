@@ -8,7 +8,8 @@ export default class Friends extends React.Component {
         this.state = {
           friends: []
         }
-        this.accept = this.accept.bind(this)
+        this.accept = this.accept.bind(this);
+        this.add = this.add.bind(this);
     }
 
     componentDidMount() {
@@ -41,6 +42,26 @@ export default class Friends extends React.Component {
                 window.location.reload();
             }
             else { alert("Failed to accept friend request."); }
+        });
+    }
+
+    add(friend){
+        fetch(
+            "http://localhost:3001/addfriend",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(friend)
+            })
+        .then(response => response.json())
+        .then(body => {
+            if (body.success) {
+                alert("Successfully sent friend request!");
+                window.location.reload();
+            }
+            else { alert("Failed to send friend request."); }
         });
     }
       
@@ -86,10 +107,10 @@ export default class Friends extends React.Component {
                         var fname = friend.fname
                         var lname = friend.lname
                         var fullName = fname.concat(" ", lname)
-                        if(!friend.isFriend && !friend.isFriendRequest){
+                        if(!friend.isFriend && !friend.isFriendRequest && !friend.isAdded){
                             return <div className="other-user" key={friend._id}> 
                             <div className="user-name">{fullName}</div>
-                            <button className="user-button">Add Friend</button>
+                            <button className="user-button" onClick={()=> this.add(friend)}>Add Friend</button>
                             </div>
                         } else { 
                             return <div key={friend._id}></div>

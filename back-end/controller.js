@@ -174,7 +174,17 @@ const acceptRequest = (req, res) => {
       else { return res.send({ success: true }); }
     }
   )
-
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost, acceptRequest }
+const addFriend = (req, res) => {
+  Friend.findOneAndUpdate(
+    { _id : req.body._id },
+    { $set: { isAdded: true }},
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost, acceptRequest, addFriend }

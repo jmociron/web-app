@@ -46,6 +46,11 @@ export default class Posts extends React.Component {
                 },
                 body: JSON.stringify(post)
             })
+        .then(response => response.json())
+        .then(body => {
+            if (body.success) { alert("Successfully deleted post!"); }
+            else { alert("Failed to delete post."); }
+        });
     }
 
     create(e){
@@ -93,18 +98,17 @@ export default class Posts extends React.Component {
                 {postList.map((post) => {
                     if(post.email === this.state.email){
                         return <div className="posts" key={post._id}>
-                        {post.author} {post.timestamp}
-                        <br/>
-                        {post.content}
-                        <br/>
+                        {post.author}
+                        <div className='timestamp'> {post.timestamp} </div>
+                        <div className='post-content'>{post.content}</div>
                         <button className="post-button">Edit</button>
                         <button className="post-button" onClick={()=> this.delete(post)}>Delete</button>
                         </div>
                     }else{
                         return <div className="posts" key={post._id}>
-                            {post.author} {post.timestamp}
-                            <br/>
-                            {post.content}
+                            {post.author}
+                            <div className='timestamp'> {post.timestamp} </div>
+                            <div className='post-content'>{post.content}</div>
                             </div>
                     }
                     })}

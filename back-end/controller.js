@@ -129,7 +129,8 @@ const deletePost = (req, res) => {
   Post.findOneAndRemove(
     { _id : req.body._id },
     (err) => { 
-      if(err){ console.log(err) }
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
     }
   )
 }

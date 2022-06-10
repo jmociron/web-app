@@ -20,6 +20,7 @@
     display: flex;
     justify-content: space-around;
     background-color: #00A1EE;
+    font-weight: bold;
 }
 
 .form button{
@@ -30,8 +31,6 @@
     border: none;
     padding: 7px 10px;
 }
-
-
 
 .posts{
     margin: auto;
@@ -55,3 +54,22 @@
     font-weight: bold;
     border-radius: 50px;
 }
+
+.people b{
+    color: #00A1EE;
+}
+
+.timestamp{
+    color: #FFFFFF;
+    background-color: #00A1EE;
+    font-size: 12px;
+    opacity: 50%;
+}
+
+.post-content{
+    color: #FFFFFF;
+    background-color: #00A1EE;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

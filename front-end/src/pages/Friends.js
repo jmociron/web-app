@@ -8,6 +8,7 @@ export default class Friends extends React.Component {
         this.state = {
           friends: []
         }
+        this.accept = this.accept.bind(this)
     }
 
     componentDidMount() {
@@ -21,6 +22,26 @@ export default class Friends extends React.Component {
             this.setState({ friends: body })
         })
 
+    }
+
+    accept(friend){
+        fetch(
+            "http://localhost:3001/acceptrequest",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(friend)
+            })
+        .then(response => response.json())
+        .then(body => {
+            if (body.success) {
+                alert("Successfully accepted friend request!");
+                window.location.reload();
+            }
+            else { alert("Failed to accept friend request."); }
+        });
     }
       
     render(){
@@ -50,7 +71,7 @@ export default class Friends extends React.Component {
                         if(friend.isFriendRequest){
                             return <div className="other-user" key={friend._id}> 
                             <div className="user-name">{fullName}</div>
-                            <button className="user-button">Confirm</button>
+                            <button className="user-button" onClick={()=> this.accept(friend)}>Accept</button>
                             <button className="user-button">Delete</button>
                             </div>
                         } else { 

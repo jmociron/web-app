@@ -2,7 +2,5 @@ db.friends.insertOne({fname: "Alan", lname: "Turing", email: "turing@gmail.com",
 db.friends.insertOne({fname: "Tim", lname: "Berners-Lee", email: "timbernerslee@w3c.com", isFriend: false, isFriendRequest: true})
 db.friends.insertOne({fname: "Sheila", lname: "Greibach", email: "sgreibach@yahoo.com", isFriend: false, isFriendRequest: false})
 
-db.posts.insertOne({ timestamp: new Date(), author: "Sheila Greibach", content: "Hello world!"})
-db.posts.insertOne({ timestamp: new Date(), author: "Alan Turing", content: "Hello world!"})
-db.posts.insertOne({ timestamp: new Date(), author: "Tim Berners-Lee", content: "Hello world!"})
-db.posts.insertOne({ timestamp: new Date(), author: "Jamie Ciron", content: "Hello world!"})
+db.posts.insertOne({ timestamp: new Date(), author: "Jamie Mari Ciron", email: "j@g.com", content: "Hello world!"})
+db.posts.insertOne({ timestamp: new Date(), author: "Alan Turing", email: "turing@gmail.com", content: "I love Computer Science!"})

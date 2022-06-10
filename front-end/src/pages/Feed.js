@@ -13,7 +13,9 @@ export default class Feed extends Component {
     this.state = {
       checkedIfLoggedIn: false,
       isLoggedIn: null,
-      username: localStorage.getItem("username")
+      username: localStorage.getItem("username"),
+      email: localStorage.getItem("email"),
+      fullname: localStorage.getItem("fullname")
     }
     this.logout = this.logout.bind(this);
   }
@@ -43,6 +45,8 @@ export default class Feed extends Component {
     cookies.remove("authToken");
     
     localStorage.removeItem("username");
+    localStorage.removeItem("email");
+    localStorage.removeItem("fullname");
 
     this.setState({ isLoggedIn: false });
   }
@@ -74,12 +78,6 @@ export default class Feed extends Component {
                 <Friends/>
               </aside>
               <main className="middle">
-                <form className="form">
-                      <input type="text"/>
-                  <div className='form-buttons'>
-                      <button type="submit">Post Now</button>
-                  </div>
-                  </form>
                 <Posts/>
               </main>
             </div>

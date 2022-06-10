@@ -56,7 +56,11 @@ const login = (req, res) => {
       // initializes a token containing id as payload, and a signature
       const token = jwt.sign(payload, "THIS_IS_A_SECRET_STRING");
 
-      return res.send({ success: true, token, username: user.fname });
+      const fname = user.fname;
+      const lname = user.lname;
+      const fullname = fname.concat(" ", lname);
+
+      return res.send({ success: true, token, username: fname, email: email, fullname: fullname });
 
     })
   })
@@ -130,4 +134,23 @@ const deletePost = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost }
+const createPost = (req, res) => {
+
+    const newpost = new Post({
+      timestamp: new Date(),
+      author: req.body.author,
+      email: req.body.email,
+      content: req.body.content
+    });
+  
+    console.log("New post: ");
+    console.log(newpost);
+  
+    newpost.save((err) => {
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
+    });
+
+}
+
+export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost }

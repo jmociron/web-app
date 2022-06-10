@@ -6,7 +6,9 @@ export default class Posts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          posts: []
+          posts: [],
+          username: localStorage.getItem("username"),
+          email: localStorage.getItem("email")
         }
         this.get = this.get.bind(this);
         this.delete = this.delete.bind(this);
@@ -22,6 +24,7 @@ export default class Posts extends React.Component {
         this.get();
     }
 
+    // retrives all posts from the EXER10 database
     get(){
         fetch('http://localhost:3001/getposts')
         .then(function(response) {
@@ -32,6 +35,7 @@ export default class Posts extends React.Component {
         })
     }
 
+    // deletes a post from the corresponding button clicked
     delete(post){
         fetch(
             "http://localhost:3001/deletepost",
@@ -42,15 +46,17 @@ export default class Posts extends React.Component {
                 },
                 body: JSON.stringify(post)
             })
-        this.render()
     }
       
     render(){
+        // creates a list containing all posts retrieved from the db
         const postList = this.state.posts;
         return(
+            // renders posts (adds buttons to posts from current user)
             <div className="all-posts">
                 {postList.map((post) => {
-                    if(post.author === "Jamie Ciron"){
+                    console.log(this.state.email)
+                    if(post.author === this.state.username){
                         return <div className="posts" key={post._id}>
                         {post.author} {post.timestamp}
                         <br/>

@@ -56,8 +56,7 @@ const login = (req, res) => {
       // initializes a token containing id as payload, and a signature
       const token = jwt.sign(payload, "THIS_IS_A_SECRET_STRING");
 
-      return res.send({ success: true, token, username: user.fname });
-
+      return res.send({ success: true, token, username: user.fname, email: user.email });
     })
   })
 }
@@ -130,4 +129,13 @@ const deletePost = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost }
+const deleteRequest = (req, res) => {
+  Friend.findOneAndRemove(
+    { _id : req.body._id },
+    (err) => { 
+      if(err){ console.log(err) }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, deleteRequest }

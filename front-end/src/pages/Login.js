@@ -30,8 +30,8 @@ export default class Login extends Component {
       password: document.getElementById("login-password").value
     }
 
-     // checks if any field is empty
-     if(Object.values(credentials).indexOf("") > -1){
+    // checks if any field is empty
+    if(Object.values(credentials).indexOf("") > -1){
       alert("Please fill out all fields before logging in.")
       return
     }
@@ -67,7 +67,6 @@ export default class Login extends Component {
               age: 60*60,
               sameSite: "lax"
             });
-
             localStorage.setItem("username", body.username);
             alert("Successfully logged in");
             this.changeLoggedIn();

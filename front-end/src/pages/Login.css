@@ -27,7 +27,7 @@
     font-weight: bold;
     padding: 10px;
     margin-top: 10px;
-    background-color: #00A1EE;
+    background-color: #000080;
     color: #FFFFFF;
 }
 
@@ -59,7 +59,7 @@
     margin-top: 10px;
     font-size: 13px;
     text-decoration: none;
-    color: #00A1EE;
+    color: #000080;
 }
 
 .email-prompt{

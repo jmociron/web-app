@@ -30,11 +30,13 @@ export default class Friends extends React.Component {
                 <div className='my-friends'>
                     <b>Friends</b>
                     {friendList.map((friend) => {
+                        var fname = friend.fname
+                        var lname = friend.lname
+                        var fullName = fname.concat(" ", lname)
                         if(friend.isFriend){
                             return <div className="other-user" key={friend._id}> 
-                            <div className="user-name">{friend.fname} <br/> {friend.lname}</div>
+                            <div className="user-name">{fullName}</div>
                             </div>
-
                         } else { return <div key={friend._id}></div> }
                     })}
                 </div>
@@ -42,13 +44,15 @@ export default class Friends extends React.Component {
                 <div className='my-requests'>
                     <b>Friend Requests</b>
                     {friendList.map((friend) => {
+                        var fname = friend.fname
+                        var lname = friend.lname
+                        var fullName = fname.concat(" ", lname)
                         if(friend.isFriendRequest){
                             return <div className="other-user" key={friend._id}> 
-                            <div className="user-name">{friend.fname} <br/> {friend.lname}</div>
+                            <div className="user-name">{fullName}</div>
                             <button className="user-button">Confirm</button>
                             <button className="user-button">Delete</button>
                             </div>
-
                         } else { 
                             return <div key={friend._id}></div>
                         }
@@ -58,9 +62,12 @@ export default class Friends extends React.Component {
                 <div className="explore-users">
                     <b>Explore</b>
                     {friendList.map((friend) => {
+                        var fname = friend.fname
+                        var lname = friend.lname
+                        var fullName = fname.concat(" ", lname)
                         if(!friend.isFriend && !friend.isFriendRequest){
                             return <div className="other-user" key={friend._id}> 
-                            <div className="user-name">{friend.fname} <br/> {friend.lname}</div>
+                            <div className="user-name">{fullName}</div>
                             <button className="user-button">Add Friend</button>
                             </div>
                         } else { 

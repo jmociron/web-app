@@ -67,17 +67,17 @@ export default class Feed extends Component {
                 Welcome to BlueBook, { this.state.username }
               </div>
               <div className="header-center">
-                <input type="text" placeholder="Search"></input>
+                <input type="text" id="search-bar" placeholder="Search"></input>
               </div>
               <div className="header-right">
                 <button id="logout" onClick={this.logout}>Log Out</button>
               </div>
             </header> 
             <div className="feed-columns">
-              <aside className="left">
+              <aside className="friends-column">
                 <Friends/>
               </aside>
-              <main className="middle">
+              <main className="posts-column">
                 <Posts/>
               </main>
             </div>

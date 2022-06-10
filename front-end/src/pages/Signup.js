@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import isValidEmail from 'pragmatic-email-regex';
+import isValidEmail from "pragmatic-email-regex";
 import "./Signup.css";
 
 export default class Signup extends Component {

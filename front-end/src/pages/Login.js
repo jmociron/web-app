@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import isValidEmail from 'pragmatic-email-regex';
+import isValidEmail from "pragmatic-email-regex";
 import "./Login.css";
 
 export default class Login extends Component {

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 // creates a schema for the friend model
 const FriendSchema = new mongoose.Schema({

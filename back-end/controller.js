@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
 const User = mongoose.model("User");
 const Friend = mongoose.model("Friend");
@@ -36,7 +36,7 @@ const login = (req, res) => {
 
     // early return for error or non-existent user
     if (err || !user) {
-      console.log("User doesn't exist!");
+      console.log("User does not exist!");
       return res.send({ success: false });
     }
 
@@ -154,4 +154,15 @@ const createPost = (req, res) => {
 
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost }
+const editPost = (req, res) => {
+  Post.findOneAndUpdate(
+    { _id : req.body.id },
+    { $set: { timestamp: new Date(), content: req.body.content }},
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost }

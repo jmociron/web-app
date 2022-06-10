@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 // creates a schema for the posts model
 const PostSchema = new mongoose.Schema({

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-import Friends from './Friends';
-import Posts from './Posts';
+import Friends from "./Friends";
+import Posts from "./Posts";
 import "./Feed.css";
 
 export default class Feed extends Component {

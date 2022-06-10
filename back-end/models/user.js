@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 // creates a schema for the user model
 const UserSchema = new mongoose.Schema({
@@ -27,7 +27,7 @@ UserSchema.pre("save", function(next) {
       
       if (hashError) { return next(hashError); }
 
-      // stores the hash as the user's password
+      // stores the hash as the user"s password
       user.password = hash;
       return next();
 

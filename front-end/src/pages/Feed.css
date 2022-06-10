@@ -38,6 +38,7 @@
 #search-bar{
     text-indent: 5px;
     color: #000080;
+    width: 500px;
 }
 
 .header-right button{

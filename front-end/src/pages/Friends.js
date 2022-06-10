@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import "./Friends.css";
 
 export default class Friends extends React.Component {
@@ -13,7 +13,7 @@ export default class Friends extends React.Component {
     componentDidMount() {
         
         // retrieves friends from the friends collection
-        fetch('http://localhost:3001/getfriends')
+        fetch("http://localhost:3001/getfriends")
         .then(function(response) {
         return response.json();
         })
@@ -26,8 +26,8 @@ export default class Friends extends React.Component {
     render(){
         const friendList = this.state.friends;
         return(
-            <div className='people'>
-                <div className='my-friends'>
+            <div className="people">
+                <div className="my-friends">
                     <b>Friends</b>
                     {friendList.map((friend) => {
                         var fname = friend.fname
@@ -41,7 +41,7 @@ export default class Friends extends React.Component {
                     })}
                 </div>
                 <hr/>
-                <div className='my-requests'>
+                <div className="my-requests">
                     <b>Friend Requests</b>
                     {friendList.map((friend) => {
                         var fname = friend.fname

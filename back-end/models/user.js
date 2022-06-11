@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   friends: { type: [], required: true },
+  added: { type: [], required: true },
   requests: { type: [], required: true }
 });
 

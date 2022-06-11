@@ -117,10 +117,19 @@ const getUsers = (req, res) => {
 const addFriend = (req, res) => {
   User.findOneAndUpdate(
     { _id : req.body.addID },
-    { $push: { requests: req.body.myID }},
+    { $push: { requests: req.body.myID } },
     (err) => { 
       if (err) { return res.send({ success: false }); }
-      else { return res.send({ success: true }); }
+      else { 
+        User.findOneAndUpdate(
+          { _id : req.body.myID },
+          { $push: { added: req.body.addID } },
+          (err) => { 
+            if (err) { return res.send({ success: false }); }
+            else { return res.send({ success: true }); }
+          }
+        )
+       }
     }
   )
 }
@@ -138,4 +147,48 @@ const getRequests = (req, res) => {
 
 }
 
-export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests }
+const getAdded = (req, res) => {
+  User.findOne(
+    { _id : req.body.myID },
+    (err, user) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(user.added);
+      }
+    }
+  )
+}
+
+const acceptRequest = (req, res) => {
+  User.findOneAndUpdate(
+    { _id : req.body.myID },
+    { $push: { friends: req.body.accID }, $pull: { requests: req.body.accID } },
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { 
+        User.findOneAndUpdate(
+          { _id : req.body.accID },
+          { $push: { friends: req.body.myID }, $pull: { added: req.body.myID } },
+          (err) => { 
+            if (err) { return res.send({ success: false }); }
+            else { return res.send({ success: true }); }
+          }
+        )
+       }
+    }
+  )
+}
+
+const getFriends = (req, res) => {
+  User.findOne(
+    { _id : req.body.myID },
+    (err, user) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(user.friends);
+      }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends }

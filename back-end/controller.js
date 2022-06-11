@@ -253,4 +253,14 @@ const editPost = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost }
+const deletePost = (req, res) => {
+  Post.findOneAndRemove(
+    { _id : req.body._id },
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost, deletePost }

@@ -12,6 +12,7 @@ export default class Posts extends React.Component {
         }
         this.createPost = this.createPost.bind(this);
         this.editPost = this.editPost.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
 
     componentDidMount(){
@@ -96,6 +97,27 @@ export default class Posts extends React.Component {
             });
 
     }
+
+    deletePost(post){
+        fetch(
+            "http://localhost:3001/deletepost",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(post)
+            })
+        .then(response => response.json())
+        .then(body => {
+            if (body.success) {
+                alert("Successfully deleted post!");
+                window.location.reload();
+            }
+            else { alert("Failed to delete post."); }
+        });
+    }
+
       
     render(){
         const postList = this.state.posts;
@@ -115,7 +137,7 @@ export default class Posts extends React.Component {
                                 <div className="timestamp"> {post.timestamp} </div>
                                 <div className="post-content">{post.content}</div>
                                 <button className="post-button" onClick={()=> this.editPost(post)}>Edit</button>
-                                <button className="post-button" onClick={()=> this.delete(post)}>Delete</button>
+                                <button className="post-button" onClick={()=> this.deletePost(post)}>Delete</button>
                             </div> 
                         )
                     }else{

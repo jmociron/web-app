@@ -6,7 +6,7 @@ const router = (app) => {
   app.post("/checkifloggedin", checkIfLoggedIn);
   app.get("/getusers", getUsers);
   app.post("/addfriend", addFriend);
-  app.get("/getrequests", getRequests);
+  app.post("/getrequests", getRequests);
   // app.get("/getposts", getPosts);
   // app.post("/getfriends", getFriends);
   // app.post("/deletepost", deletePost);

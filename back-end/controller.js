@@ -126,6 +126,15 @@ const addFriend = (req, res) => {
 }
 
 const getRequests = (req, res) => {
+  User.findOne(
+    { _id : req.body.myID },
+    (err, user) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(user.requests);
+      }
+    }
+  )
 
 }
 

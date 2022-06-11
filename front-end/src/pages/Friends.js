@@ -7,12 +7,14 @@ export default class users extends React.Component {
         super(props);
         this.state = {
             id: localStorage.getItem("id"),
-            users: []
+            users: [],
+            requests: []
         }
         this.addFriend = this.addFriend.bind(this);
     }
 
     componentDidMount(){
+
         fetch("http://localhost:3001/getusers")
         .then(function(response) {
         return response.json();
@@ -20,6 +22,26 @@ export default class users extends React.Component {
         .then(body =>{
             this.setState({ users: body })
         })
+
+        const myInfo = {
+            myID: this.state.id
+        }
+
+        fetch(
+            "http://localhost:3001/getrequests",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(myInfo)
+            })
+        .then(response => response.json())
+        .then(body => {
+            if (body.success) {
+                this.setState({ requests: body })
+                console.log(this.state.requests)
+            }});
     }   
 
     addFriend(friend){

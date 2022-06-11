@@ -165,8 +165,6 @@ export default class users extends React.Component {
                         return(
                             <div className="user-box" key={user._id}> 
                                 <div className="user-name">{user.fname}&nbsp;{user.lname}</div>
-                                <div className="button-div">
-                                </div>
                             </div>
                         )
                     } else { return <div key={user._id}> </div> }

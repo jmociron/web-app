@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Friends from "./Friends";
+import Posts from "./Posts";
 import "./Feed.css";
 
 export default class Feed extends Component {
@@ -44,7 +45,6 @@ export default class Feed extends Component {
     
     localStorage.removeItem("id");
     localStorage.removeItem("username");
-    localStorage.removeItem("email");
     localStorage.removeItem("fullname");
 
     this.setState({ isLoggedIn: false });
@@ -74,7 +74,7 @@ export default class Feed extends Component {
                 <Friends/>
               </aside>
               <main className="posts-column">
-                {/* <Posts/> */}
+                <Posts/>
               </main>
               <aside className="search-column">
                   {/* <Search/> */}

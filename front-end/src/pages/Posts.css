@@ -17,11 +17,10 @@
     text-indent: 10px;
 }
 
-.form-buttons{
-    display: flex;
-    justify-content: space-around;
+.form-button{
     background-color: #1DA1F2;
     font-weight: bold;
+    width: 100px;
 }
 
 .form button{

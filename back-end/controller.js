@@ -211,4 +211,35 @@ const deleteRequest = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest }
+const getPosts = (req, res) => {
+  Post.find(
+    (err, posts) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(posts);
+      }
+    }
+  )
+}
+
+const createPost = (req, res) => {
+
+  const newpost = new Post({
+    timestamp: new Date(),
+    author: req.body.author,
+    fullname: req.body.fullname,
+    content: req.body.content
+  });
+
+  newpost.save((err) => {
+    if (err) { return res.send({ success: false }); }
+    else {
+      console.log("New post created: ");
+      console.log(newpost);
+      return res.send({ success: true });
+    }
+  });
+
+}
+
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost }

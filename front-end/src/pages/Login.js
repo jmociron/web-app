@@ -68,6 +68,7 @@ export default class Login extends Component {
               sameSite: "lax"
             });
 
+            localStorage.setItem("id", body.id);
             localStorage.setItem("username", body.username);
             localStorage.setItem("email", body.email);
             localStorage.setItem("fullname", body.fullname);

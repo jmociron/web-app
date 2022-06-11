@@ -13,13 +13,9 @@ export default class Feed extends Component {
 
     this.state = {
       checkedIfLoggedIn: false,
-      isLoggedIn: null,
-      username: localStorage.getItem("username"),
-      email: localStorage.getItem("email"),
-      fullname: localStorage.getItem("fullname")
+      isLoggedIn: null
     }
     this.logout = this.logout.bind(this);
-    this.findUser = this.findUser.bind(this);
   }
 
   componentDidMount() {
@@ -46,47 +42,13 @@ export default class Feed extends Component {
     const cookies = new Cookies();
     cookies.remove("authToken");
     
+    localStorage.removeItem("id");
     localStorage.removeItem("username");
     localStorage.removeItem("email");
     localStorage.removeItem("fullname");
 
     this.setState({ isLoggedIn: false });
   }
-
-  findUser(e){
-
-    e.preventDefault();
-
-    const post = {
-      name: document.getElementById("search-bar").value
-    }
-
-    if(post.content === ""){
-    alert("Please input your post content first.")
-    return
-    }
-    
-    // POST request to the server
-    fetch(
-    "http://localhost:3001/finduser",
-    {
-        method: "POST",
-        credentials: "include",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify(post)
-    })
-    .then(response => response.json())
-    .then(body => {
-      if (body.success) {
-        alert("Successfully uploaded post!");
-        window.location.reload();
-    }
-      else { alert("Failed to upload post."); }
-    });
-  } 
-
 
   render() {
 
@@ -98,26 +60,7 @@ export default class Feed extends Component {
 
       if (this.state.isLoggedIn) {
         return (
-          <div className="feed">
-            <header className="header">
-              <div className="header-left">
-                Welcome to BlueBook, { this.state.username }
-              </div>
-              <div className="header-right">
-                <button id="logout" className="header-buttons" onClick={this.logout}>Log Out</button>
-              </div>
-            </header> 
-            <div className="feed-columns">
-              <aside className="friends-column">
-                <Friends/>
-              </aside>
-              <main className="posts-column">
-                <Posts/>
-              </main>
-              <aside className="search-column">
-                  <Search/>
-              </aside>
-            </div>
+          <div>
           </div>
         )
       }

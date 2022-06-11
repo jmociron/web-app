@@ -6,7 +6,10 @@ const UserSchema = new mongoose.Schema({
   fname: { type: String, required: true },
   lname: { type: String, required: true },
   email: { type: String, required: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  friends: { type: [], required: true },
+  requests: { type: [], required: true },
+  posts: { type: [], required: true }
 });
 
 // pre hook for saving and validation

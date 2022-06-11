@@ -242,4 +242,15 @@ const createPost = (req, res) => {
 
 }
 
-export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost }
+const editPost = (req, res) => {
+  Post.findOneAndUpdate(
+    { _id : req.body.id },
+    { $set: { timestamp: new Date(), content: req.body.content }},
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost }

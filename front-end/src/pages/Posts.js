@@ -11,6 +11,7 @@ export default class Posts extends React.Component {
             posts: []
         }
         this.createPost = this.createPost.bind(this);
+        this.editPost = this.editPost.bind(this);
     }
 
     componentDidMount(){
@@ -60,6 +61,41 @@ export default class Posts extends React.Component {
         });
 
     }
+
+    editPost(post){
+
+        const editContent = prompt("Enter your edit below:", "")
+
+        if(editContent === ""){
+            alert("Please input your post content first.")
+            return
+        }
+
+        const editInfo = {
+            id: post._id,
+            content: editContent
+        }
+
+        fetch(
+            "http://localhost:3001/editpost",
+            {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(editInfo)
+            })
+            .then(response => response.json())
+            .then(body => {
+              if (body.success) {
+                alert("Successfully edited post!");
+                window.location.reload();
+            }
+              else { alert("Failed to edit post."); }
+            });
+
+    }
       
     render(){
         const postList = this.state.posts;
@@ -78,7 +114,7 @@ export default class Posts extends React.Component {
                                 {post.fullname}
                                 <div className="timestamp"> {post.timestamp} </div>
                                 <div className="post-content">{post.content}</div>
-                                <button className="post-button" onClick={()=> this.edit(post)}>Edit</button>
+                                <button className="post-button" onClick={()=> this.editPost(post)}>Edit</button>
                                 <button className="post-button" onClick={()=> this.delete(post)}>Delete</button>
                             </div> 
                         )

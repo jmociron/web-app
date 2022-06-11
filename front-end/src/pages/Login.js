@@ -70,7 +70,7 @@ export default class Login extends Component {
 
             localStorage.setItem("id", body.id);
             localStorage.setItem("username", body.username);
-            localStorage.setItem("fullname", body.fullname);
+            localStorage.setItem("cname", body.cname);
             
             alert("Successfully logged in");
             this.changeLoggedIn();

@@ -7,7 +7,7 @@ export default class Posts extends React.Component {
         super(props);
         this.state = {
             id: localStorage.getItem("id"),
-            fullname: localStorage.getItem("fullname"),
+            cname: localStorage.getItem("cname"),
             posts: []
         }
         this.createPost = this.createPost.bind(this);
@@ -30,13 +30,13 @@ export default class Posts extends React.Component {
     createPost(e){
 
         e.preventDefault();
-
+        
         const postInfo = {
             author: this.state.id,
-            fullname: this.state.fullname,
+            cname: this.state.cname,
             content: document.getElementById("post-content").value
         }
-
+        
         if(postInfo.content === ""){
             alert("Please input your post content first.")
             return
@@ -133,11 +133,13 @@ export default class Posts extends React.Component {
                     if(post.author === this.state.id){
                         return(
                             <div className="posts" key={post._id}>
-                                {post.fullname}
+                                {post.cname}
                                 <div className="timestamp"> {post.timestamp} </div>
                                 <div className="post-content">{post.content}</div>
-                                <button className="post-button" onClick={()=> this.editPost(post)}>Edit</button>
-                                <button className="post-button" onClick={()=> this.deletePost(post)}>Delete</button>
+                                <div className="button-div">
+                                    <button className="post-button" onClick={()=> this.editPost(post)}>Edit</button>
+                                    <button className="post-button" onClick={()=> this.deletePost(post)}>Delete</button>
+                                </div>
                             </div> 
                         )
                     }else{

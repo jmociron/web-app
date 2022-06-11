@@ -14,10 +14,17 @@ export default class Signup extends Component {
     // prevents refreshing
     e.preventDefault();
 
+    var fname = document.getElementById("signup-fname").value;
+    var lname = document.getElementById("signup-lname").value;
+    var cname = fname.concat(" ", lname)
+
+    console.log(cname)
+
     // retrieves input and saves to user object
     const user = {
-      fname: document.getElementById("signup-fname").value,
-      lname: document.getElementById("signup-lname").value,
+      fname: fname,
+      lname: lname,
+      cname: cname,
       email: document.getElementById("signup-email").value,
       password: document.getElementById("signup-password").value
     }

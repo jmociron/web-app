@@ -10,6 +10,7 @@ const signup = (req, res) => {
   const newuser = new User({
     fname: req.body.fname,
     lname: req.body.lname,
+    cname: req.body.cname,
     email: req.body.email,
     password: req.body.password
   });
@@ -57,10 +58,9 @@ const login = (req, res) => {
 
       const id = user._id;
       const fname = user.fname;
-      const lname = user.lname;
-      const fullname = fname.concat(" ", lname);
+      const cname = user.cname;
 
-      return res.send({ success: true, token, id: id, username: fname, email: email, fullname: fullname });
+      return res.send({ success: true, token, id: id, username: fname, cname: cname });
 
     })
   })
@@ -212,22 +212,23 @@ const deleteRequest = (req, res) => {
 }
 
 const getPosts = (req, res) => {
-  Post.find(
+  Post.find({}).sort({timestamp: -1}).exec(
     (err, posts) => { 
       if(err){ console.log(err); }
       else{ 
         res.send(posts);
       }
-    }
-  )
+  });
 }
 
 const createPost = (req, res) => {
 
+  console.log(req.body)
+
   const newpost = new Post({
     timestamp: new Date(),
     author: req.body.author,
-    fullname: req.body.fullname,
+    cname: req.body.cname,
     content: req.body.content
   });
 
@@ -263,4 +264,24 @@ const deletePost = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost, deletePost }
+const findUser = (req, res) => {
+  console.log(req.body)
+  User.find(
+    { $or:
+      [
+        { fname : req.body.name },
+        { lname: req.body.name },
+        { cname: req.body.name }
+      ]
+    },
+    (err, users) => { 
+      if(err){ console.log(err); }
+      else{
+        console.log(users);
+        res.send(users);
+      }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost, deletePost, findUser }

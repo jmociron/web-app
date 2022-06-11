@@ -164,7 +164,7 @@ export default class users extends React.Component {
                     if(friendsList.includes(user._id)){
                         return(
                             <div className="user-box" key={user._id}> 
-                                <div className="user-name">{user.fname}&nbsp;{user.lname}</div>
+                                <div className="user-name">{user.cname}</div>
                             </div>
                         )
                     } else { return <div key={user._id}> </div> }
@@ -176,7 +176,7 @@ export default class users extends React.Component {
                     if(requestsList.includes(user._id)){
                         return(
                             <div className="user-box" key={user._id}> 
-                                <div className="user-name">{user.fname}&nbsp;{user.lname}</div>
+                                <div className="user-name">{user.cname}</div>
                                 <div className="button-div">
                                     <button className="user-buttons" onClick={()=> this.acceptRequest(user)}>Accept</button>
                                     <button className="user-buttons" onClick={()=> this.deleteRequest(user)}>Reject</button>
@@ -192,7 +192,7 @@ export default class users extends React.Component {
                     if(addedList.includes(user._id)){
                         return(
                             <div className="user-box" key={user._id}> 
-                                <div className="user-name">{user.fname}&nbsp;{user.lname}</div>
+                                <div className="user-name">{user.cname}</div>
                             </div>
                         )
                     } else { return <div key={user._id}> </div> }
@@ -204,7 +204,7 @@ export default class users extends React.Component {
                     if(user._id !== this.state.id && !friendsList.includes(user._id) && !addedList.includes(user._id) && !requestsList.includes(user._id)){
                         return(
                             <div className="user-box" key={user._id}> 
-                                <div className="user-name">{user.fname}&nbsp;{user.lname}</div>
+                                <div className="user-name">{user.cname}</div>
                                 <div className="button-div">
                                     <button className="user-buttons" onClick={()=> this.addFriend(user)}>Add Friend</button>
                                 </div>

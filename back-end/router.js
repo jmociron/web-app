@@ -1,4 +1,4 @@
-import { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost, deletePost } from "./controller.js";
+import { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost, deletePost, findUser } from "./controller.js";
 
 const router = (app) => {
   app.post("/signup", signup);
@@ -15,7 +15,7 @@ const router = (app) => {
   app.post("/createpost", createPost);
   app.post("/editpost", editPost); 
   app.post("/deletepost", deletePost);
-  // app.post("/finduser", findUser);
+  app.post("/finduser", findUser);
 }
 
 export default router;

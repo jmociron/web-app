@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import Friends from "./Friends";
 import Posts from "./Posts";
 import "./Feed.css";
+import Search from "./Search";
 
 export default class Feed extends Component {
 
@@ -45,7 +46,7 @@ export default class Feed extends Component {
     
     localStorage.removeItem("id");
     localStorage.removeItem("username");
-    localStorage.removeItem("fullname");
+    localStorage.removeItem("cname");
 
     this.setState({ isLoggedIn: false });
   }
@@ -77,7 +78,7 @@ export default class Feed extends Component {
                 <Posts/>
               </main>
               <aside className="search-column">
-                  {/* <Search/> */}
+                  <Search/>
               </aside>
             </div>
           </div>

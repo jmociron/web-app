@@ -104,7 +104,6 @@ const checkIfLoggedIn = (req, res) => {
 }
 
 const getFriends = (req, res) => {
-  // retrieves all friends
   Friend.find(
     (err, friends) => { 
       if(err){ console.log(err); }
@@ -198,4 +197,20 @@ const addFriend = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost, acceptRequest, addFriend, deleteRequest }
+const findUser = (req, res) => {
+  Friend.find(
+    { $or:
+      [
+        { fname : req.body.name },
+        { lname: req.body.name },
+        { cname: req.body.name }
+      ]
+    },
+    (err, users) => { 
+      if(err){ console.log(err); }
+      else{ res.send(users); }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost, acceptRequest, addFriend, deleteRequest, findUser }

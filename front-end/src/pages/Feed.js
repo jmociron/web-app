@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Friends from "./Friends";
 import Posts from "./Posts";
+import Search from "./Search";
 import "./Feed.css";
 
 export default class Feed extends Component {
@@ -18,6 +19,7 @@ export default class Feed extends Component {
       fullname: localStorage.getItem("fullname")
     }
     this.logout = this.logout.bind(this);
+    this.findUser = this.findUser.bind(this);
   }
 
   componentDidMount() {
@@ -51,6 +53,41 @@ export default class Feed extends Component {
     this.setState({ isLoggedIn: false });
   }
 
+  findUser(e){
+
+    e.preventDefault();
+
+    const post = {
+      name: document.getElementById("search-bar").value
+    }
+
+    if(post.content === ""){
+    alert("Please input your post content first.")
+    return
+    }
+    
+    // POST request to the server
+    fetch(
+    "http://localhost:3001/finduser",
+    {
+        method: "POST",
+        credentials: "include",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(post)
+    })
+    .then(response => response.json())
+    .then(body => {
+      if (body.success) {
+        alert("Successfully uploaded post!");
+        window.location.reload();
+    }
+      else { alert("Failed to upload post."); }
+    });
+  } 
+
+
   render() {
 
     if (!this.state.checkedIfLoggedIn) {
@@ -66,11 +103,8 @@ export default class Feed extends Component {
               <div className="header-left">
                 Welcome to BlueBook, { this.state.username }
               </div>
-              <div className="header-center">
-                <input type="text" id="search-bar" placeholder="Search"></input>
-              </div>
               <div className="header-right">
-                <button id="logout" onClick={this.logout}>Log Out</button>
+                <button id="logout" className="header-buttons" onClick={this.logout}>Log Out</button>
               </div>
             </header> 
             <div className="feed-columns">
@@ -80,6 +114,9 @@ export default class Feed extends Component {
               <main className="posts-column">
                 <Posts/>
               </main>
+              <aside className="search-column">
+                  <Search/>
+              </aside>
             </div>
           </div>
         )

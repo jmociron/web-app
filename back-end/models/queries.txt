@@ -1,4 +1,13 @@
-db.friends.insertOne({fname: "Alan", lname: "Turing", email: "turing@gmail.com", isFriend: true, isFriendRequest: false, isAdded: false})
+db.friends.insertOne({
+    fname: "Alan",
+    lname: "Turing",
+    cname: "Alan Turing",
+    email: "turing@gmail.com",
+    isFriend: true,
+    isFriendRequest: false,
+    isAdded: false})
+
+    
 db.friends.insertOne({fname: "Tim", lname: "Berners-Lee", email: "timbernerslee@w3c.com", isFriend: false, isFriendRequest: true, isAdded: false})
 db.friends.insertOne({fname: "Sheila", lname: "Greibach", email: "sgreibach@yahoo.com", isFriend: false, isFriendRequest: false, isAdded: false})
 

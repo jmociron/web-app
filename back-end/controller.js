@@ -115,7 +115,18 @@ const getUsers = (req, res) => {
 }
 
 const addFriend = (req, res) => {
+  User.findOneAndUpdate(
+    { _id : req.body.addID },
+    { $push: { requests: req.body.myID }},
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { return res.send({ success: true }); }
+    }
+  )
+}
+
+const getRequests = (req, res) => {
 
 }
 
-export { signup, login, checkIfLoggedIn, getUsers, addFriend }
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests }

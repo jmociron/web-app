@@ -1,11 +1,11 @@
-import { signup, login, checkIfLoggedIn } from "./controller.js";
+import { signup, login, checkIfLoggedIn, getUsers, addFriend } from "./controller.js";
 
 const router = (app) => {
   app.post("/signup", signup);
   app.post("/login", login);
   app.post("/checkifloggedin", checkIfLoggedIn);
+  app.get("/getusers", getUsers);
   // app.get("/getposts", getPosts);
-  // app.get("/getusers", getUsers);
   // app.get("/getrequests", getRequests);
   // app.post("/getfriends", getFriends);
   // app.post("/deletepost", deletePost);

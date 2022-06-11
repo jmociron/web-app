@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 const User = mongoose.model("User");
-
 const Post = mongoose.model("Post");
 
 const signup = (req, res) => {
@@ -104,4 +103,19 @@ const checkIfLoggedIn = (req, res) => {
     });
 }
 
-export { signup, login, checkIfLoggedIn }
+const getUsers = (req, res) => {
+  User.find(
+    (err, users) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(users);
+      }
+    }
+  )
+}
+
+const addFriend = (req, res) => {
+
+}
+
+export { signup, login, checkIfLoggedIn, getUsers, addFriend }

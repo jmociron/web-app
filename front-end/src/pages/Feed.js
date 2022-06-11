@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Friends from "./Friends";
-import Posts from "./Posts";
-import Search from "./Search";
 import "./Feed.css";
 
 export default class Feed extends Component {
@@ -13,7 +11,9 @@ export default class Feed extends Component {
 
     this.state = {
       checkedIfLoggedIn: false,
-      isLoggedIn: null
+      isLoggedIn: null,
+      id: localStorage.getItem("id"),
+      username: null
     }
     this.logout = this.logout.bind(this);
   }
@@ -60,7 +60,26 @@ export default class Feed extends Component {
 
       if (this.state.isLoggedIn) {
         return (
-          <div>
+          <div className="feed">
+            <header className="header">
+              <div className="header-left">
+                Welcome to BlueBook, { this.state.username }
+              </div>
+              <div className="header-right">
+                <button id="logout" className="header-buttons" onClick={this.logout}>Log Out</button>
+              </div>
+            </header> 
+            <div className="feed-columns">
+              <aside className="friends-column">
+                <Friends/>
+              </aside>
+              <main className="posts-column">
+                {/* <Posts/> */}
+              </main>
+              <aside className="search-column">
+                  {/* <Search/> */}
+              </aside>
+            </div>
           </div>
         )
       }

@@ -8,8 +8,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   friends: { type: [], required: true },
-  requests: { type: [], required: true },
-  posts: { type: [], required: true }
+  requests: { type: [], required: true }
 });
 
 // pre hook for saving and validation

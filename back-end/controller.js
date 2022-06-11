@@ -191,4 +191,24 @@ const getFriends = (req, res) => {
   )
 }
 
-export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends }
+const deleteRequest = (req, res) => {
+  User.findOneAndUpdate(
+    { _id : req.body.myID },
+    { $pull: { requests: req.body.delID } },
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { 
+        User.findOneAndUpdate(
+          { _id : req.body.accID },
+          { $pull: { added: req.body.myID } },
+          (err) => { 
+            if (err) { return res.send({ success: false }); }
+            else { return res.send({ success: true }); }
+          }
+        )
+       }
+    }
+  )
+}
+
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest }

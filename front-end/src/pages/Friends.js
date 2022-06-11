@@ -14,6 +14,7 @@ export default class users extends React.Component {
         }
         this.addFriend = this.addFriend.bind(this);
         this.acceptRequest = this.acceptRequest.bind(this);
+        this.deleteRequest = this.deleteRequest.bind(this);
     }
 
     componentDidMount(){
@@ -123,7 +124,34 @@ export default class users extends React.Component {
         });
     }
 
+    deleteRequest(friend){
+        
+        const deleteInfo = {
+            myID: this.state.id,
+            delID: friend._id
+        }
+
+        fetch(
+            "http://localhost:3001/deleterequest",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(deleteInfo)
+            })
+        .then(response => response.json())
+        .then(body => {
+            if (body.success) {
+                alert("Friend request successfully rejected!");
+                window.location.reload();
+            }
+            else { alert("Failed to reject friend request."); }
+        });
+    }
+
     render(){
+
         const usersList = this.state.users;
         const requestsList = this.state.requests;
         const addedList = this.state.added;
@@ -131,6 +159,20 @@ export default class users extends React.Component {
 
         return(
             <div className="all-users">
+                <b className="text-headers">Friends</b>
+                {usersList.map((user) => {
+                    if(friendsList.includes(user._id)){
+                        return(
+                            <div className="user-box" key={user._id}> 
+                                <div className="user-name">{user.fname}&nbsp;{user.lname}</div>
+                                <div className="button-div">
+                                </div>
+                            </div>
+                        )
+                    } else { return <div key={user._id}> </div> }
+   
+                })}
+                <hr/>
                 <b className="text-headers">Incoming Requests</b>
                 {usersList.map((user) => {
                     if(requestsList.includes(user._id)){
@@ -139,7 +181,7 @@ export default class users extends React.Component {
                                 <div className="user-name">{user.fname}&nbsp;{user.lname}</div>
                                 <div className="button-div">
                                     <button className="user-buttons" onClick={()=> this.acceptRequest(user)}>Accept</button>
-                                    <button className="user-buttons" onClick={()=> this.addFriend(user)}>Reject</button>
+                                    <button className="user-buttons" onClick={()=> this.deleteRequest(user)}>Reject</button>
                                 </div>
                             </div>
                         )

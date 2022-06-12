@@ -43,3 +43,9 @@
     background-color: #1DA1F2;
     margin-top: 5px;
 }
+
+.result-header{
+    background-color: #1DA1F2;
+    color:#FFFFFF;
+    font-weight: bold;
+}

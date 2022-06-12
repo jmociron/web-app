@@ -159,7 +159,8 @@ export default class Search extends React.Component {
                 // prints search result with add friend button if not yet added 
                 if(result._id !== this.state.id && !friendsList.includes(result._id) && !addedList.includes(result._id) && !requestsList.includes(result._id)){
                     return <div key={result._id} className="result-box">
-                    <div className="result-info">First name: {result.fname}</div>
+                        <div className="result-header">User Profile:</div>
+                        <div className="result-info">First name: {result.fname}</div>
                         <div className="result-info">Last name: {result.lname}</div>
                         <div className="result-info">Email: {result.email}</div>
                         <div className="button-div">
@@ -170,7 +171,8 @@ export default class Search extends React.Component {
                 // prints search result if friend or already added
                 else {
                     return <div key={result._id} className="result-box">
-                    <div className="result-info">First name: {result.fname}</div>
+                        <div className="result-header">User Profile:</div>
+                        <div className="result-info">First name: {result.fname}</div>
                         <div className="result-info">Last name: {result.lname}</div>
                         <div className="result-info">Email: {result.email}</div>
                     </div>

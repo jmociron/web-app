@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 const User = mongoose.model("User");
-const Friend = mongoose.model("Friend");
 const Post = mongoose.model("Post");
 
 const signup = (req, res) => {
@@ -11,18 +10,18 @@ const signup = (req, res) => {
   const newuser = new User({
     fname: req.body.fname,
     lname: req.body.lname,
+    cname: req.body.cname,
     email: req.body.email,
     password: req.body.password
   });
 
-  // prints the user on the console
-  console.log("New user: ");
-  console.log(newuser);
-
   // saves the user
   newuser.save((err) => {
     if (err) { return res.send({ success: false }); }
-    else { return res.send({ success: true }); }
+    else { 
+      console.log("New user saved: ");
+      console.log(newuser);
+      return res.send({ success: true }); }
   });
 
 }
@@ -54,13 +53,13 @@ const login = (req, res) => {
       }
 
       // initializes a token containing id as payload, and a signature
-      const token = jwt.sign(payload, "THIS_IS_A_SECRET_STRING");
+      const token = jwt.sign(payload, "CMSC100EXER10");
 
+      const id = user._id;
       const fname = user.fname;
-      const lname = user.lname;
-      const fullname = fname.concat(" ", lname);
+      const cname = user.cname;
 
-      return res.send({ success: true, token, username: fname, email: email, fullname: fullname });
+      return res.send({ success: true, token, id: id, username: fname, cname: cname });
 
     })
   })
@@ -77,7 +76,7 @@ const checkIfLoggedIn = (req, res) => {
   return jwt.verify(
 
     req.cookies.authToken,
-    "THIS_IS_A_SECRET_STRING",
+    "CMSC100EXER10",
 
     (err, payload) => {
 
@@ -103,13 +102,110 @@ const checkIfLoggedIn = (req, res) => {
     });
 }
 
-const getFriends = (req, res) => {
-  Friend.find(
-    (err, friends) => { 
+const getUsers = (req, res) => {
+  User.find(
+    (err, users) => { 
       if(err){ console.log(err); }
       else{ 
-        res.send(friends);
+        res.send(users);
       }
+    }
+  )
+}
+
+const addFriend = (req, res) => {
+  User.findOneAndUpdate(
+    { _id : req.body.addID },
+    { $push: { requests: req.body.myID } },
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { 
+        User.findOneAndUpdate(
+          { _id : req.body.myID },
+          { $push: { added: req.body.addID } },
+          (err) => { 
+            if (err) { return res.send({ success: false }); }
+            else { return res.send({ success: true }); }
+          }
+        )
+       }
+    }
+  )
+}
+
+const getRequests = (req, res) => {
+  User.findOne(
+    { _id : req.body.myID },
+    (err, user) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(user.requests);
+      }
+    }
+  )
+
+}
+
+const getAdded = (req, res) => {
+  User.findOne(
+    { _id : req.body.myID },
+    (err, user) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(user.added);
+      }
+    }
+  )
+}
+
+const acceptRequest = (req, res) => {
+  User.findOneAndUpdate(
+    { _id : req.body.myID },
+    { $push: { friends: req.body.accID }, $pull: { requests: req.body.accID } },
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { 
+        User.findOneAndUpdate(
+          { _id : req.body.accID },
+          { $push: { friends: req.body.myID }, $pull: { added: req.body.myID } },
+          (err) => { 
+            if (err) { return res.send({ success: false }); }
+            else { return res.send({ success: true }); }
+          }
+        )
+       }
+    }
+  )
+}
+
+const getFriends = (req, res) => {
+  User.findOne(
+    { _id : req.body.myID },
+    (err, user) => { 
+      if(err){ console.log(err); }
+      else{ 
+        res.send(user.friends);
+      }
+    }
+  )
+}
+
+const deleteRequest = (req, res) => {
+  User.findOneAndUpdate(
+    { _id : req.body.myID },
+    { $pull: { requests: req.body.delID } },
+    (err) => { 
+      if (err) { return res.send({ success: false }); }
+      else { 
+        User.findOneAndUpdate(
+          { _id : req.body.accID },
+          { $pull: { added: req.body.myID } },
+          (err) => { 
+            if (err) { return res.send({ success: false }); }
+            else { return res.send({ success: true }); }
+          }
+        )
+       }
     }
   )
 }
@@ -124,32 +220,25 @@ const getPosts = (req, res) => {
   });
 }
 
-const deletePost = (req, res) => {
-  Post.findOneAndRemove(
-    { _id : req.body._id },
-    (err) => { 
-      if (err) { return res.send({ success: false }); }
-      else { return res.send({ success: true }); }
-    }
-  )
-}
-
 const createPost = (req, res) => {
 
-    const newpost = new Post({
-      timestamp: new Date(),
-      author: req.body.author,
-      email: req.body.email,
-      content: req.body.content
-    });
-  
-    console.log("New post: ");
-    console.log(newpost);
-  
-    newpost.save((err) => {
-      if (err) { return res.send({ success: false }); }
-      else { return res.send({ success: true }); }
-    });
+  console.log(req.body)
+
+  const newpost = new Post({
+    timestamp: new Date(),
+    author: req.body.author,
+    cname: req.body.cname,
+    content: req.body.content
+  });
+
+  newpost.save((err) => {
+    if (err) { return res.send({ success: false }); }
+    else {
+      console.log("New post created: ");
+      console.log(newpost);
+      return res.send({ success: true });
+    }
+  });
 
 }
 
@@ -164,32 +253,9 @@ const editPost = (req, res) => {
   )
 }
 
-const acceptRequest = (req, res) => {
-  Friend.findOneAndUpdate(
+const deletePost = (req, res) => {
+  Post.findOneAndRemove(
     { _id : req.body._id },
-    { $set: { isFriend: true, isFriendRequest: false }},
-    (err) => { 
-      if (err) { return res.send({ success: false }); }
-      else { return res.send({ success: true }); }
-    }
-  )
-}
-
-const deleteRequest = (req, res) => {
-  Friend.findOneAndUpdate(
-    { _id : req.body._id },
-    { $set: { isFriendRequest: false }},
-    (err) => { 
-      if (err) { return res.send({ success: false }); }
-      else { return res.send({ success: true }); }
-    }
-  )
-}
-
-const addFriend = (req, res) => {
-  Friend.findOneAndUpdate(
-    { _id : req.body._id },
-    { $set: { isAdded: true }},
     (err) => { 
       if (err) { return res.send({ success: false }); }
       else { return res.send({ success: true }); }
@@ -198,7 +264,7 @@ const addFriend = (req, res) => {
 }
 
 const findUser = (req, res) => {
-  Friend.find(
+  User.find(
     { $or:
       [
         { fname : req.body.name },
@@ -208,9 +274,11 @@ const findUser = (req, res) => {
     },
     (err, users) => { 
       if(err){ console.log(err); }
-      else{ res.send(users); }
+      else{
+        res.send(users);
+      }
     }
   )
 }
 
-export { signup, login, checkIfLoggedIn, getFriends, getPosts, deletePost, createPost, editPost, acceptRequest, addFriend, deleteRequest, findUser }
+export { signup, login, checkIfLoggedIn, getUsers, addFriend, getRequests, getAdded, acceptRequest, getFriends, deleteRequest, getPosts, createPost, editPost, deletePost, findUser }

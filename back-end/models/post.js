@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const PostSchema = new mongoose.Schema({
   timestamp: { type: Date, required: true },
   author: { type: String, required: true },
-  email: { type: String, required: true },
+  cname: { type: String, required: true },
   content: { type: String, required: true }
 });
 

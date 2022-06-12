@@ -3,8 +3,8 @@ import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Friends from "./Friends";
 import Posts from "./Posts";
-import Search from "./Search";
 import "./Feed.css";
+import Search from "./Search";
 
 export default class Feed extends Component {
 
@@ -14,12 +14,10 @@ export default class Feed extends Component {
     this.state = {
       checkedIfLoggedIn: false,
       isLoggedIn: null,
-      username: localStorage.getItem("username"),
-      email: localStorage.getItem("email"),
-      fullname: localStorage.getItem("fullname")
+      id: localStorage.getItem("id"),
+      username: null
     }
     this.logout = this.logout.bind(this);
-    this.findUser = this.findUser.bind(this);
   }
 
   componentDidMount() {
@@ -46,47 +44,13 @@ export default class Feed extends Component {
     const cookies = new Cookies();
     cookies.remove("authToken");
     
+    localStorage.removeItem("id");
     localStorage.removeItem("username");
-    localStorage.removeItem("email");
-    localStorage.removeItem("fullname");
-
+    localStorage.removeItem("cname");
+    
+    alert("Successfully logged out!");
     this.setState({ isLoggedIn: false });
   }
-
-  findUser(e){
-
-    e.preventDefault();
-
-    const post = {
-      name: document.getElementById("search-bar").value
-    }
-
-    if(post.content === ""){
-    alert("Please input your post content first.")
-    return
-    }
-    
-    // POST request to the server
-    fetch(
-    "http://localhost:3001/finduser",
-    {
-        method: "POST",
-        credentials: "include",
-        headers: {
-        "Content-Type": "application/json"
-        },
-        body: JSON.stringify(post)
-    })
-    .then(response => response.json())
-    .then(body => {
-      if (body.success) {
-        alert("Successfully uploaded post!");
-        window.location.reload();
-    }
-      else { alert("Failed to upload post."); }
-    });
-  } 
-
 
   render() {
 

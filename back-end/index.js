@@ -2,7 +2,6 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import "./models/user.js";
-import "./models/friend.js";
 import "./models/post.js";
 import router from "./router.js";
 
@@ -29,8 +28,8 @@ app.use(cookieParser());
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader("Access-Control-Allow-Methods", "POST");
-  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Access-Control-Allow-Methods, Origin,Accept, Content-Type");
-  res.setHeader("Access-Control-Allow-Credentials","true");
+  res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Access-Control-Allow-Methods, Origin, Accept, Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   next();
 });
 

@@ -17,11 +17,10 @@
     text-indent: 10px;
 }
 
-.form-buttons{
-    display: flex;
-    justify-content: space-around;
+.form-button{
     background-color: #1DA1F2;
     font-weight: bold;
+    width: 100px;
 }
 
 .form button{
@@ -46,12 +45,12 @@
 }
 
 .post-button{
-    width: 75px;
+    width: 100px;
     margin-top: 10px;
     margin-right: 10px;
     color: #1DA1F2;
     border: none;
-    padding: 5px;
+    padding: 7px;
     font-weight: bold;
     border-radius: 50px;
 }

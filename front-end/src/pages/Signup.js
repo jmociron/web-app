@@ -15,6 +15,8 @@ export default class Signup extends Component {
       pw2: ""
     }
     this.signup = this.signup.bind(this);
+    this.changeFname = this.changeFname.bind(this);
+    this.changeLname = this.changeLname.bind(this);
     this.changeEmail = this.changeEmail.bind(this);
     this.changePW1 = this.changePW1.bind(this);
     this.changePW2 = this.changePW2.bind(this);

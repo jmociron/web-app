@@ -15,14 +15,13 @@ const signup = (req, res) => {
     password: req.body.password
   });
 
-  // prints the user on the console
-  console.log("New user: ");
-  console.log(newuser);
-
   // saves the user
   newuser.save((err) => {
     if (err) { return res.send({ success: false }); }
-    else { return res.send({ success: true }); }
+    else { 
+      console.log("New user saved: ");
+      console.log(newuser);
+      return res.send({ success: true }); }
   });
 
 }
@@ -265,7 +264,6 @@ const deletePost = (req, res) => {
 }
 
 const findUser = (req, res) => {
-  console.log(req.body)
   User.find(
     { $or:
       [
@@ -277,7 +275,6 @@ const findUser = (req, res) => {
     (err, users) => { 
       if(err){ console.log(err); }
       else{
-        console.log(users);
         res.send(users);
       }
     }

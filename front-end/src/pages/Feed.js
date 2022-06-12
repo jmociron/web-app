@@ -47,7 +47,8 @@ export default class Feed extends Component {
     localStorage.removeItem("id");
     localStorage.removeItem("username");
     localStorage.removeItem("cname");
-
+    
+    alert("Successfully logged out!");
     this.setState({ isLoggedIn: false });
   }
 

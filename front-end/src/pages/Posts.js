@@ -8,7 +8,8 @@ export default class Posts extends React.Component {
         this.state = {
             id: localStorage.getItem("id"),
             cname: localStorage.getItem("cname"),
-            posts: []
+            posts: [],
+            friends: []
         }
         this.createPost = this.createPost.bind(this);
         this.editPost = this.editPost.bind(this);
@@ -23,6 +24,24 @@ export default class Posts extends React.Component {
         })
         .then(body =>{
             this.setState({ posts: body })
+        })
+
+        const myInfo = {
+            myID: this.state.id
+        }
+
+        fetch(
+            "http://localhost:3001/getfriends",
+            {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json"
+                },
+                body: JSON.stringify(myInfo)
+            })
+        .then(response => response.json())
+        .then(body => {
+            this.setState({ friends: body })
         })
 
     }
@@ -121,6 +140,7 @@ export default class Posts extends React.Component {
       
     render(){
         const postList = this.state.posts;
+        const friendsList = this.state.friends;
         return(
             <div className="all-posts">
                 <form className="form">
@@ -142,14 +162,16 @@ export default class Posts extends React.Component {
                                 </div>
                             </div> 
                         )
-                    }else{
+                    }else if (friendsList.includes(post.author)){
                         return(
                         <div className="posts" key={post._id}>
-                            {post.author}
+                            {post.cname}
                             <div className="timestamp"> {post.timestamp} </div>
                             <div className="post-content">{post.content}</div>
                         </div>
                         )
+                    }else {
+                        return <div key={post._id}></div>
                     }
                 })}
             </div>

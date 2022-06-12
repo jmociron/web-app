@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import isValidEmail from "pragmatic-email-regex";
+import { Navigate } from "react-router-dom";
 import { validatePassword } from "../validator"
 import "./Signup.css";
 

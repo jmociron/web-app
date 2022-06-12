@@ -22,6 +22,7 @@ export default class Feed extends Component {
 
   componentDidMount() {
 
+    // checks if user is logged in 
     fetch("http://localhost:3001/checkifloggedin",
       {
         method: "POST",
@@ -41,15 +42,19 @@ export default class Feed extends Component {
 
     e.preventDefault();
 
+    // deletes cookie
     const cookies = new Cookies();
     cookies.remove("authToken");
     
+    // deletes user info in local storage
     localStorage.removeItem("id");
     localStorage.removeItem("username");
     localStorage.removeItem("cname");
     
+    // alerts user and sets state to false
     alert("Successfully logged out!");
     this.setState({ isLoggedIn: false });
+    
   }
 
   render() {
@@ -60,6 +65,7 @@ export default class Feed extends Component {
 
     else {
 
+      // renders feed if logged in
       if (this.state.isLoggedIn) {
         return (
           <div className="feed">
@@ -86,6 +92,7 @@ export default class Feed extends Component {
         )
       }
 
+      // redirects to homepage if not logged in
       else {
         return <Navigate to="/" />
       }

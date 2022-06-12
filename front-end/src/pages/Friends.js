@@ -19,6 +19,7 @@ export default class users extends React.Component {
 
     componentDidMount(){
 
+        // gets all users on page load
         fetch("http://localhost:3001/getusers")
         .then(function(response) {
         return response.json();
@@ -31,6 +32,7 @@ export default class users extends React.Component {
             myID: this.state.id
         }
 
+        // gets incoming friend requests on page load
         fetch(
             "http://localhost:3001/getrequests",
             {
@@ -45,6 +47,7 @@ export default class users extends React.Component {
             this.setState({ requests: body })
         })
 
+        // gets outgoing friend requests on page load
         fetch(
             "http://localhost:3001/getadded",
             {
@@ -59,6 +62,7 @@ export default class users extends React.Component {
             this.setState({ added: body })
         })
 
+        // gets user's friends on page load
         fetch(
             "http://localhost:3001/getfriends",
             {
@@ -75,11 +79,14 @@ export default class users extends React.Component {
     }   
 
     addFriend(friend){
+
+        // creates an object containing ids
         const addInfo = {
             myID: this.state.id,
             addID: friend._id
         }
 
+        // sends a POST request
         fetch(
             "http://localhost:3001/addfriend",
             {
@@ -100,11 +107,14 @@ export default class users extends React.Component {
     }
 
     acceptRequest(friend){
+
+        // creates object containing ids
         const acceptInfo = {
             myID: this.state.id,
             accID: friend._id
         }
 
+        // sends a POST request
         fetch(
             "http://localhost:3001/acceptrequest",
             {
@@ -126,11 +136,13 @@ export default class users extends React.Component {
 
     deleteRequest(friend){
         
+        // creates an object containing ids
         const deleteInfo = {
             myID: this.state.id,
             delID: friend._id
         }
 
+        // sends a POST request
         fetch(
             "http://localhost:3001/deleterequest",
             {
@@ -143,10 +155,10 @@ export default class users extends React.Component {
         .then(response => response.json())
         .then(body => {
             if (body.success) {
-                alert("Friend request successfully rejected!");
+                alert("Friend request successfully delete!");
                 window.location.reload();
             }
-            else { alert("Failed to reject friend request."); }
+            else { alert("Failed to delete friend request."); }
         });
     }
 
@@ -159,6 +171,7 @@ export default class users extends React.Component {
 
         return(
             <div className="all-users">
+                {/* prints friends without any buttons */}
                 <b className="text-headers">Friends</b>
                 {usersList.map((user) => {
                     if(friendsList.includes(user._id)){
@@ -171,6 +184,7 @@ export default class users extends React.Component {
    
                 })}
                 <hr/>
+                {/* prints incoming requests with accept/delete button */}
                 <b className="text-headers">Incoming Requests</b>
                 {usersList.map((user) => {
                     if(requestsList.includes(user._id)){
@@ -179,7 +193,7 @@ export default class users extends React.Component {
                                 <div className="user-name">{user.cname}</div>
                                 <div className="button-div">
                                     <button className="user-buttons" onClick={()=> this.acceptRequest(user)}>Accept</button>
-                                    <button className="user-buttons" onClick={()=> this.deleteRequest(user)}>Reject</button>
+                                    <button className="user-buttons" onClick={()=> this.deleteRequest(user)}>Delete</button>
                                 </div>
                             </div>
                         )
@@ -187,6 +201,7 @@ export default class users extends React.Component {
    
                 })}
                 <hr/>
+                {/* prints outgoing requests without buttons */}
                 <b className="text-headers">Outgoing Requests</b>
                 {usersList.map((user) => {
                     if(addedList.includes(user._id)){
@@ -199,6 +214,7 @@ export default class users extends React.Component {
    
                 })}
                 <hr/>
+                {/* prints other users with add friend button */}
                 <b className="text-headers">Explore Users</b>
                 {usersList.map((user) => {
                     if(user._id !== this.state.id && !friendsList.includes(user._id) && !addedList.includes(user._id) && !requestsList.includes(user._id)){

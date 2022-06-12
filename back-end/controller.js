@@ -19,6 +19,7 @@ const signup = (req, res) => {
   newuser.save((err) => {
     if (err) { return res.send({ success: false }); }
     else { 
+      // prints user created and saved
       console.log("New user saved: ");
       console.log(newuser);
       return res.send({ success: true }); }
@@ -103,6 +104,7 @@ const checkIfLoggedIn = (req, res) => {
 }
 
 const getUsers = (req, res) => {
+  // gets all users from the database
   User.find(
     (err, users) => { 
       if(err){ console.log(err); }
@@ -114,12 +116,14 @@ const getUsers = (req, res) => {
 }
 
 const addFriend = (req, res) => {
+  // adds the current user's id to the requests array
   User.findOneAndUpdate(
     { _id : req.body.addID },
     { $push: { requests: req.body.myID } },
     (err) => { 
       if (err) { return res.send({ success: false }); }
       else { 
+        // adds the user id to the added array
         User.findOneAndUpdate(
           { _id : req.body.myID },
           { $push: { added: req.body.addID } },
@@ -134,6 +138,7 @@ const addFriend = (req, res) => {
 }
 
 const getRequests = (req, res) => {
+  // gets all incoming requests of current user
   User.findOne(
     { _id : req.body.myID },
     (err, user) => { 
@@ -147,6 +152,7 @@ const getRequests = (req, res) => {
 }
 
 const getAdded = (req, res) => {
+  // gets all outgoing requests of the current user
   User.findOne(
     { _id : req.body.myID },
     (err, user) => { 
@@ -159,12 +165,14 @@ const getAdded = (req, res) => {
 }
 
 const acceptRequest = (req, res) => {
+  // adds id to friends array and removes from requests array
   User.findOneAndUpdate(
     { _id : req.body.myID },
     { $push: { friends: req.body.accID }, $pull: { requests: req.body.accID } },
     (err) => { 
       if (err) { return res.send({ success: false }); }
       else { 
+        // adds id to friends array and removes from added array
         User.findOneAndUpdate(
           { _id : req.body.accID },
           { $push: { friends: req.body.myID }, $pull: { added: req.body.myID } },
@@ -179,6 +187,7 @@ const acceptRequest = (req, res) => {
 }
 
 const getFriends = (req, res) => {
+  // gets all the current user's friends
   User.findOne(
     { _id : req.body.myID },
     (err, user) => { 
@@ -191,12 +200,14 @@ const getFriends = (req, res) => {
 }
 
 const deleteRequest = (req, res) => {
+  // removes id from requests array
   User.findOneAndUpdate(
     { _id : req.body.myID },
     { $pull: { requests: req.body.delID } },
     (err) => { 
       if (err) { return res.send({ success: false }); }
       else { 
+        // removes id from added array
         User.findOneAndUpdate(
           { _id : req.body.accID },
           { $pull: { added: req.body.myID } },
@@ -211,6 +222,7 @@ const deleteRequest = (req, res) => {
 }
 
 const getPosts = (req, res) => {
+  // gets all posts and sorts by descending time of posting
   Post.find({}).sort({timestamp: -1}).exec(
     (err, posts) => { 
       if(err){ console.log(err); }
@@ -222,8 +234,7 @@ const getPosts = (req, res) => {
 
 const createPost = (req, res) => {
 
-  console.log(req.body)
-
+  // creates a post using request body attributes
   const newpost = new Post({
     timestamp: new Date(),
     author: req.body.author,
@@ -231,9 +242,11 @@ const createPost = (req, res) => {
     content: req.body.content
   });
 
+  // saves the post
   newpost.save((err) => {
     if (err) { return res.send({ success: false }); }
     else {
+      // prints the created and saved post
       console.log("New post created: ");
       console.log(newpost);
       return res.send({ success: true });
@@ -243,6 +256,7 @@ const createPost = (req, res) => {
 }
 
 const editPost = (req, res) => {
+  // edits post content and updates timestamp
   Post.findOneAndUpdate(
     { _id : req.body.id },
     { $set: { timestamp: new Date(), content: req.body.content }},
@@ -254,6 +268,7 @@ const editPost = (req, res) => {
 }
 
 const deletePost = (req, res) => {
+  // deletes posts from database
   Post.findOneAndRemove(
     { _id : req.body._id },
     (err) => { 
@@ -264,6 +279,7 @@ const deletePost = (req, res) => {
 }
 
 const findUser = (req, res) => {
+  // finds user which matches fname/lname/complete name with search input
   User.find(
     { $or:
       [

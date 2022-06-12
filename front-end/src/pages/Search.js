@@ -18,6 +18,7 @@ export default class Search extends React.Component {
 
     componentDidMount(){
 
+        // gets all users on page load
         fetch("http://localhost:3001/getusers")
         .then(function(response) {
         return response.json();
@@ -30,6 +31,7 @@ export default class Search extends React.Component {
             myID: this.state.id
         }
 
+        // gets all friend requests on page load
         fetch(
             "http://localhost:3001/getrequests",
             {
@@ -44,6 +46,7 @@ export default class Search extends React.Component {
             this.setState({ requests: body })
         })
 
+        // get all outgoing requests on page load
         fetch(
             "http://localhost:3001/getadded",
             {
@@ -58,6 +61,7 @@ export default class Search extends React.Component {
             this.setState({ added: body })
         })
 
+        // gets all friends on page load
         fetch(
             "http://localhost:3001/getfriends",
             {
@@ -72,13 +76,16 @@ export default class Search extends React.Component {
             this.setState({ friends: body })
         })
     }   
-
+    
     addFriend(friend){
+
+        // creates object containing ids
         const addInfo = {
             myID: this.state.id,
             addID: friend._id
         }
 
+        // sends a POST request
         fetch(
             "http://localhost:3001/addfriend",
             {
@@ -100,17 +107,21 @@ export default class Search extends React.Component {
 
     search(e){
         
+        // prevents refreshing
         e.preventDefault();
 
+        // creates object containing search input
         const user = {
             name: document.getElementById("search-bar").value
         }
 
+        // early return if input is empty
         if (user.name === ""){
             alert("Please input a user name before searching.");
             return
         }
 
+        // sends a POST request
         fetch(
             "http://localhost:3001/finduser",
             {
@@ -129,7 +140,6 @@ export default class Search extends React.Component {
                 this.setState({ results: body })
             }
         )    
-
     }
 
     render(){
@@ -146,6 +156,7 @@ export default class Search extends React.Component {
               <button id="find" className="search-button" onClick={this.search}>Search</button>
             </div>
             {resultList.map((result) => {
+                // prints search result with add friend button if not yet added 
                 if(result._id !== this.state.id && !friendsList.includes(result._id) && !addedList.includes(result._id) && !requestsList.includes(result._id)){
                     return <div key={result._id} className="result-box">
                     <div className="result-info">First name: {result.fname}</div>
@@ -155,7 +166,9 @@ export default class Search extends React.Component {
                             <button className="result-button" onClick={()=> this.addFriend(result)}>Add Friend</button>
                         </div>
                     </div>
-                } else {
+                }
+                // prints search result if friend or already added
+                else {
                     return <div key={result._id} className="result-box">
                     <div className="result-info">First name: {result.fname}</div>
                         <div className="result-info">Last name: {result.lname}</div>

@@ -24,7 +24,7 @@ export default class Login extends Component {
     // prevents refreshing
     e.preventDefault();
 
-    // saves input to credentials object
+    // saves input to the credentials object
     const credentials = {
       email: document.getElementById("login-email").value,
       password: document.getElementById("login-password").value
@@ -42,7 +42,7 @@ export default class Login extends Component {
       return
     }
 
-    // POST request to the server
+    // sends a POST request to the server
     fetch(
       "http://localhost:3001/login",
       {
@@ -55,9 +55,11 @@ export default class Login extends Component {
       .then(response => response.json())
       .then(body => {    
         if (!body.success){
-          alert("Failed to login!")
+          alert("Failed to login! Your email or password is incorrect.")
         }
         else {
+          
+          // creates a cookie storing token info
           const cookies = new Cookies();
           cookies.set(
             "authToken",
@@ -67,24 +69,26 @@ export default class Login extends Component {
               age: 60*60,
               sameSite: "lax"
             });
-
+            
+            // saves the user's id, first name, and complete name
             localStorage.setItem("id", body.id);
             localStorage.setItem("username", body.username);
             localStorage.setItem("cname", body.cname);
             
-            alert("Successfully logged in");
+            alert("Successfully logged in!");
             this.changeLoggedIn();
         }
       })
   }
 
   render() {
-    
-    // goes to Feed if login is successful
+
+    // renders the feed when user is logged in
     if(this.state.isLoggedIn){
       return <Navigate to="/feed" />
     }
 
+    // renders the login form to retrieve user email and password
     return (
       <div className="login-horizontal">
         <div className="login-vertical">

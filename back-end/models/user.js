@@ -3,14 +3,14 @@ import bcrypt from "bcrypt";
 
 // creates a schema for the user model
 const UserSchema = new mongoose.Schema({
-  fname: { type: String, required: true },
-  lname: { type: String, required: true },
-  cname: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  friends: { type: [], required: true },
-  added: { type: [], required: true },
-  requests: { type: [], required: true }
+  fname: { type: String, required: true }, // first name
+  lname: { type: String, required: true }, // last name
+  cname: { type: String, required: true }, // complete name
+  email: { type: String, required: true }, // email address
+  password: { type: String, required: true }, // password (encrypted)
+  friends: { type: [], required: true }, // array of ids (friends)
+  added: { type: [], required: true }, // array of ids (outgoing friend requests)
+  requests: { type: [], required: true } // array of ids (incoming friend requests)
 });
 
 // pre hook for saving and validation

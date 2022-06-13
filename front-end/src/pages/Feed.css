@@ -37,6 +37,10 @@
     margin-left: 10px;
 }
 
+.feed{
+    max-width: 100%;
+}
+
 #find{
     margin-left: 10px;
 }

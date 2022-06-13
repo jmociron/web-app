@@ -214,7 +214,7 @@ const deleteRequest = (req, res) => {
       else { 
         // removes id from added array
         User.findOneAndUpdate(
-          { _id : req.body.accID },
+          { _id : req.body.delID },
           { $pull: { added: req.body.myID } },
           (err) => { 
             if (err) { return res.send({ success: false }); }

@@ -30,8 +30,7 @@ export default class Signup extends Component {
     var fname = this.state.fname;
     var lname = this.state.lname;
     var cname = fname.concat(" ", lname)
-
-    
+   
     // retrieves input and saves to user object
     const user = {
       fname: fname,
@@ -54,6 +53,12 @@ export default class Signup extends Component {
       return
     }
 
+    if(this.state.pw1 !== this.state.pw2){
+      alert("Passwords do not match, please try again!");
+      return
+    }
+
+
     // POST request to the server
     fetch(
       "http://localhost:3001/signup",
@@ -66,7 +71,7 @@ export default class Signup extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        if (body.success) { alert("Successfully saved user!"); }
+        if (body.success) { alert("Successfully saved user! You may now log-in with your new account."); }
         else { alert("Failed to save user."); }
       });
   }

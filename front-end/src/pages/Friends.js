@@ -155,7 +155,7 @@ export default class users extends React.Component {
         .then(response => response.json())
         .then(body => {
             if (body.success) {
-                alert("Friend request successfully delete!");
+                alert("Friend request successfully deleted!");
                 window.location.reload();
             }
             else { alert("Failed to delete friend request."); }

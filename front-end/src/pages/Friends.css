@@ -33,7 +33,8 @@
 .user-buttons{
     width: 100px;
     margin-top: 10px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
     color: #1DA1F2;
     border: none;
     padding: 7px;

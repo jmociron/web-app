@@ -129,7 +129,9 @@ const addFriend = (req, res) => {
           { $push: { added: req.body.addID } },
           (err) => { 
             if (err) { return res.send({ success: false }); }
-            else { return res.send({ success: true }); }
+            else {
+              console.log("Successfully sent friend request!");
+              return res.send({ success: true }); }
           }
         )
        }
@@ -178,7 +180,10 @@ const acceptRequest = (req, res) => {
           { $push: { friends: req.body.myID }, $pull: { added: req.body.myID } },
           (err) => { 
             if (err) { return res.send({ success: false }); }
-            else { return res.send({ success: true }); }
+            else { 
+              console.log("Friend request successfully accepted!");
+              return res.send({ success: true });
+            }
           }
         )
        }
@@ -213,7 +218,10 @@ const deleteRequest = (req, res) => {
           { $pull: { added: req.body.myID } },
           (err) => { 
             if (err) { return res.send({ success: false }); }
-            else { return res.send({ success: true }); }
+            else { 
+              console.log("Friend request successfully deleted!");
+              return res.send({ success: true });
+            }
           }
         )
        }
@@ -262,7 +270,10 @@ const editPost = (req, res) => {
     { $set: { timestamp: new Date(), content: req.body.content }},
     (err) => { 
       if (err) { return res.send({ success: false }); }
-      else { return res.send({ success: true }); }
+      else {
+        console.log("Successfully edited post!");
+        return res.send({ success: true });
+      }
     }
   )
 }
@@ -273,7 +284,10 @@ const deletePost = (req, res) => {
     { _id : req.body._id },
     (err) => { 
       if (err) { return res.send({ success: false }); }
-      else { return res.send({ success: true }); }
+      else { 
+        console.log("Successfully deleted post!");
+        return res.send({ success: true });
+      }
     }
   )
 }

@@ -184,9 +184,9 @@ export default class users extends React.Component {
    
                 })}
                 <hr/>
-                {/* prints incoming requests with accept/delete button */}
                 <b className="text-headers">Incoming Requests</b>
                 {usersList.map((user) => {
+                    // prints incoming requests with accept/delete button
                     if(requestsList.includes(user._id)){
                         return(
                             <div className="user-box" key={user._id}> 
@@ -201,9 +201,9 @@ export default class users extends React.Component {
    
                 })}
                 <hr/>
-                {/* prints outgoing requests without buttons */}
                 <b className="text-headers">Outgoing Requests</b>
                 {usersList.map((user) => {
+                    // prints outgoing requests without buttons
                     if(addedList.includes(user._id)){
                         return(
                             <div className="user-box" key={user._id}> 
@@ -214,9 +214,9 @@ export default class users extends React.Component {
    
                 })}
                 <hr/>
-                {/* prints other users with add friend button */}
                 <b className="text-headers">Explore Users</b>
                 {usersList.map((user) => {
+                    // prints other users with add friend button
                     if(user._id !== this.state.id && !friendsList.includes(user._id) && !addedList.includes(user._id) && !requestsList.includes(user._id)){
                         return(
                             <div className="user-box" key={user._id}> 

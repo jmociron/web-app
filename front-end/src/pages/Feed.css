@@ -1,8 +1,4 @@
-*{
-    margin: 0;
-    padding: 0;
-}
-
+/* sets alignment, display, and padding for header */
 .header{
     margin-left: 0;
     margin-right: 0;
@@ -14,25 +10,21 @@
     background: #1DA1F2;
 }
 
+/* sets alignments for items in subheader */
 .header-left, .header-right{
     display: flex;
     align-items: center;
 }
 
+/* sets header color */
 .header div{
     background-color: #1DA1F2;
 }
 
+/* sets text color for greeting text */
 .header-left{
     color: white;
     font-weight: bold;
-}
-
-#search-bar{
-    text-indent: 5px;
-    padding: 5px;
-    color: #1DA1F2;
-    width: 500px;
 }
 
 .header-buttons{

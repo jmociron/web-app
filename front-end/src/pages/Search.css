@@ -1,14 +1,21 @@
+/* sets display for search */
 .search-div{
     display: flex;
 }
 
+/* design for search bar */
 #search-bar{
     width: 60%;
     border: none;
     border-bottom: 1px solid #1DA1F2;
     opacity: 50%;
+    text-indent: 5px;
+    padding: 5px;
+    color: #1DA1F2;
+    width: 500px;
 }
 
+/* design for search button */
 .search-button{
     color: #FFFFFF;
     background-color: #1DA1F2;
@@ -20,6 +27,7 @@
     margin-left: 10px;
 }
 
+/* design for buttons on user profiles */
 .result-button{
     color: #1DA1F2;
     background-color: #FFFFFF;
@@ -31,6 +39,7 @@
     margin-top: 10px;
 }
 
+/* design for user profiles */
 .result-box{
     color: #FFFFFF;
     margin-top: 15px;
@@ -39,11 +48,13 @@
     border-radius: 5px;
 }
 
+/* spacing for user profile info */
 .result-info{
     background-color: #1DA1F2;
     margin-top: 5px;
 }
 
+/* design for user profile header */
 .result-header{
     background-color: #1DA1F2;
     color:#FFFFFF;
